@@ -1,0 +1,19 @@
+<div class="container">
+    <h2>Listado de Materias</h2>
+    <mat-list>
+      <mat-list-item *ngFor="let materia of materias">
+        <div class="materia-info">
+          <div class="materia-nombre">{{ materia.nombre }}</div>
+          <div class="materia-opciones">
+            <button mat-icon-button color="warn" (click)="eliminarMateria(materia.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <a mat-button color="primary" routerLink="/crear-materia">
+      <mat-icon>add</mat-icon> Crear Nueva Materia
+    </a>
+  </div>
+  

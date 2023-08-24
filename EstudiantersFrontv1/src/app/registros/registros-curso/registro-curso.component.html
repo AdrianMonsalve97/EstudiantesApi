@@ -1,0 +1,41 @@
+<div class="container">
+  <h2>Registro de Cursos</h2>
+  
+  <!-- Botón para crear un  registro -->
+  <button mat-raised-button color="primary" (click)="createRegistroCurso()">Crear Nuevo Registro</button>
+  
+  <mat-list>
+    <mat-list-item *ngFor="let registro of registrosCursos">
+      <h3>{{ registro.estudiante.nombre }}</h3>
+      <p>Curso: {{ registro.curso.nombre }}</p>
+      <p>Profesor: {{ registro.profesor.nombre }}</p>
+
+      <button mat-icon-button color="warn" (click)="deleteRegistroCurso(registro.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+  
+  <div>
+    <label for="cursoSelect">Seleccionar Curso:</label>
+    <select id="cursoSelect" [(ngModel)]="selectedCursoId" (ngModelChange)="loadMateriasPorCurso(selectedCursoId)">
+      <option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.nombre }}</option>
+    </select>
+  </div>
+  
+  <div *ngIf="selectedCursoId">
+    <label>Materias Disponibles:</label>
+    <ul>
+      <li *ngFor="let materia of getMateriasPorCurso(selectedCursoId)">
+        {{ materia.nombre }}
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <label for="nombreEstudiante">Nombre del Estudiante:</label>
+    <input id="nombreEstudiante" [(ngModel)]="nuevoRegistro.nombreEstudiante" />
+    <button mat-raised-button color="primary" (click)="createRegistroCurso()">Guardar Registro</button>
+
+  </div>
+</div>

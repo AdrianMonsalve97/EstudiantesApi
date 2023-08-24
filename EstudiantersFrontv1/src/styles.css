@@ -1,0 +1,28 @@
+/* app.component.css */
+
+.navbar {
+    background-color: black; 
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .app-title {
+    margin: 0;
+  }
+  
+  .nav-list {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-link-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .content-container {
+    padding: 1rem;
+  }
+  

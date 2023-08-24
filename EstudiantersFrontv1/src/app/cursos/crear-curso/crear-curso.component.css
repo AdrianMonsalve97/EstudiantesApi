@@ -1,0 +1,15 @@
+.full-width {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  /* Estilo para mensajes de éxito */
+.exito-snackbar {
+  background-color: #43a047;
+  color: #fff;
+}
+
+/* Estilo para mensajes de error */
+.error-snackbar {
+  background-color: #d32f2f;
+  color: #fff;
+}

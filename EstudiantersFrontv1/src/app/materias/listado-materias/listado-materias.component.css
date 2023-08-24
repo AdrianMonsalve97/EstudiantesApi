@@ -1,0 +1,32 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .mat-list-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .materia-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .materia-nombre {
+    flex-grow: 1;
+  }
+  
+  .materia-opciones {
+    margin-left: 10px;
+  }
+  
+  a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #1976d2;
+  }
+  

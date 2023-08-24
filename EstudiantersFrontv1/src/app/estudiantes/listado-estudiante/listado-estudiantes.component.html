@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-content>
+    <h2>Lista de Estudiantes</h2>
+    <mat-table [dataSource]="dataSource">
+      <!-- Columna ID -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let estudiante">{{ estudiante.id }}</mat-cell>
+      </ng-container>
+
+      <!-- Columna Nombre -->
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let estudiante">{{ estudiante.nombre }}</mat-cell>
+      </ng-container>
+
+      <!-- Columna Opciones (Editar y Eliminar) -->
+      <ng-container matColumnDef="opciones">
+        <mat-header-cell *matHeaderCellDef>Opciones</mat-header-cell>
+        <mat-cell *matCellDef="let estudiante">
+          <button mat-icon-button color="primary" (click)="editarEstudiante(estudiante.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminarEstudiante(estudiante.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-row *matRowDef="let fila; columns: columnas;"></mat-row>
+    </mat-table>
+
+    <ng-template #noEstudiantes>
+      <p>No hay estudiantes registrados.</p>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

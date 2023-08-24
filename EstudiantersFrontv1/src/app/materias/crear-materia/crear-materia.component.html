@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Crear Nueva Materia</h2>
+    <mat-form-field>
+      <input matInput placeholder="Nombre de la Materia" [(ngModel)]="nombre" name="nombre" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="crearMateria()">Crear Materia</button>
+    <a mat-button color="primary" routerLink="/listado-materias">
+      <mat-icon>arrow_back</mat-icon> Volver al Listado
+    </a>
+  </div>
+  

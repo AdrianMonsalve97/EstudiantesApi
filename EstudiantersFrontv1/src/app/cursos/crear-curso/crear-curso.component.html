@@ -1,0 +1,6 @@
+<form (ngSubmit)="crearCurso()" #crearCursoForm="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Nombre del Curso" [(ngModel)]="nombre" name="nombre" required>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Crear Curso</button>
+</form>

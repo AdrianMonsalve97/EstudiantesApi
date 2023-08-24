@@ -1,0 +1,17 @@
+/* crear-estudiante.component.css */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .material-icons {
+    margin-right: 8px;
+  }
+  
