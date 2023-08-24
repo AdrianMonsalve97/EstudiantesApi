@@ -7,27 +7,28 @@ import { Materia } from '../models/materia';
   providedIn: 'root'
 })
 export class MateriaService {
-  private baseUrl = 'http://localhost:5000/api/materias';
+  private baseUrl = 'http://localhost:5000/api/materia';
 
   constructor(private http: HttpClient) {}
 
   obtenerMaterias(): Observable<Materia[]> {
-    return this.http.get<Materia[]>(this.baseUrl);
+    return this.http.get<Materia[]>(`${this.baseUrl}/materia`);
   }
-
+  
   obtenerMateriaPorId(id: number): Observable<Materia> {
-    return this.http.get<Materia>(`${this.baseUrl}/${id}`);
+    return this.http.get<Materia>(`${this.baseUrl}/materia/${id}`);
   }
-
-  crearMateria(curso: Materia): Observable<Materia> {
-    return this.http.post<Materia>(this.baseUrl, curso);
+  
+  crearMateria(materia: Materia): Observable<Materia> {
+    return this.http.post<Materia>(`${this.baseUrl}/materia`, materia);
   }
-
-  actualizarMateria(id: number, curso: Materia): Observable<void> {
-    return this.http.put<void>(`${this.baseUrl}/${id}`, curso);
+  
+  actualizarMateria(id: number, materia: Materia): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/materia/${id}`, materia);
   }
-
+  
   eliminarMateria(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/materia/${id}`);
   }
+  
 }
