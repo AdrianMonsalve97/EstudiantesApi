@@ -11,12 +11,12 @@ namespace Estudiantes.API.Controllers
     public class CursoController : ControllerBase
     {
         private readonly CursoService _cursoService;
-        private readonly ApplicationDbContext _context; 
+        private readonly ApplicationDbContext _context;
 
         public CursoController(CursoService cursoService, ApplicationDbContext context)
         {
             _cursoService = cursoService;
-            _context = context; 
+            _context = context;
         }
         [HttpGet]
         public ActionResult<IEnumerable<Curso>> GetCursos()
@@ -37,12 +37,13 @@ namespace Estudiantes.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateCurso(string nombre)
+        public ActionResult CreateCurso([FromBody] Curso curso)
         {
-            var curso = new Curso { Nombre = nombre };
             _cursoService.CreateCurso(curso);
             return CreatedAtAction(nameof(GetCurso), new { id = curso.Id }, curso);
         }
+
+
         [HttpPut("{id}")]
         public void UpdateCurso(Curso curso)
         {

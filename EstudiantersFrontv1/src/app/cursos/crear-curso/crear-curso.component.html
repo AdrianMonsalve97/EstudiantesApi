@@ -1,6 +1,16 @@
-<form (ngSubmit)="crearCurso()" #crearCursoForm="ngForm">
-  <mat-form-field>
-    <input matInput placeholder="Nombre del Curso" [(ngModel)]="nombre" name="nombre" required>
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Crear Curso</button>
-</form>
+<div class="crear-curso-container">
+  <h2>Crear Nuevo Curso</h2>
+  <form [formGroup]="cursoForm" (ngSubmit)="crearCurso()">
+    <mat-form-field>
+      <input matInput formControlName="id" placeholder="ID del curso">
+      <mat-error *ngIf="cursoForm.get('id')?.invalid">El ID es requerido</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="nombre" placeholder="Nombre del curso">
+      <mat-error *ngIf="cursoForm.get('nombre')?.invalid">El nombre es requerido</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Crear Curso</button>
+  </form>
+  
+  
+</div>
