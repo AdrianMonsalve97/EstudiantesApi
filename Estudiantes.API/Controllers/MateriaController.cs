@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Estudiantes.API.Models;
+using Estudiantes.API.Data; 
 using Estudiantes.API.Services;
-
 namespace Estudiantes.API.Controllers
 {
     [Route("api/materia")]
@@ -10,10 +10,12 @@ namespace Estudiantes.API.Controllers
     public class MateriaController : ControllerBase
     {
         private readonly MateriaService _materiaService;
+        private readonly ApplicationDbContext _context;
 
-        public MateriaController(MateriaService materiaService)
+        public MateriaController(MateriaService materiaService, ApplicationDbContext context)
         {
             _materiaService = materiaService;
+            _context = context;
         }
 
         [HttpGet]
@@ -33,12 +35,14 @@ namespace Estudiantes.API.Controllers
             }
             return Ok(materia);
         }
-
         [HttpPost]
         public ActionResult CreateMateria(Materia materia)
         {
             var profesor = materia.Profesor;
-            if (profesor != null && _materiaService.GetMateriasByProfesorId(profesor.Id).Count >= 2)
+
+            var profesorAsignado = _context.Profesores.FirstOrDefault(p => p.Id == profesor.Id);
+
+            if (profesorAsignado != null && profesorAsignado.Materias.Count >= 2)
             {
                 return BadRequest("El profesor ya tiene asignadas dos materias.");
             }
