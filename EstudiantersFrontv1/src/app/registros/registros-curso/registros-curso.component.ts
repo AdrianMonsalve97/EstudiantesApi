@@ -16,7 +16,6 @@ export class RegistroCursoComponent implements OnInit {
   selectedCursoId!: number;
   nuevoRegistro: {
     nombreEstudiante: string;
-    // Agrega más propiedades según lo necesites para el nuevo registro
   } = {
     nombreEstudiante: "",
   };

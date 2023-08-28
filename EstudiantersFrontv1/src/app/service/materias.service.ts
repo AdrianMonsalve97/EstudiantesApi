@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Materia } from '../models/materia';
+import { Profesor } from '../models/profesor';
+import { ProfesorService } from './profesor.service';
+import { CursosService } from './curso.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,10 @@ import { Materia } from '../models/materia';
 export class MateriaService {
   private baseUrl = 'http://localhost:5000/api/materia';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    private profesorService: ProfesorService,
+    private cursosService: CursosService
+    ) {}
 
   obtenerMaterias(): Observable<Materia[]> {
     return this.http.get<Materia[]>(`${this.baseUrl}/materia`);
@@ -30,5 +36,10 @@ export class MateriaService {
   eliminarMateria(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/materia/${id}`);
   }
-  
+  obtenerProfesores(): Observable<Profesor[]> {
+    return this.profesorService.obtenerProfesores();
+  }
+  obtenerCursos(): Observable<Profesor[]> {
+    return this.cursosService.obtenerCursos();
+  }
 }

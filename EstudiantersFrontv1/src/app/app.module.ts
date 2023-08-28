@@ -27,7 +27,7 @@ import { EditarMateriaComponent } from './materias/editar-materia/editar-materia
 import { MatListModule } from '@angular/material/list';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RegistroCursoComponent } from './registros/registros-curso/registros-curso.component'; 
-
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +60,9 @@ import { RegistroCursoComponent } from './registros/registros-curso/registros-cu
     MatTableModule,
     MatIconModule,
     FormsModule,
+    MatSelectModule,
     MatListModule,
+    
     
   ],
   providers: [],

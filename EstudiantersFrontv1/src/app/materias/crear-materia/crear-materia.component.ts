@@ -1,55 +1,66 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { MateriaService } from 'src/app/service/materias.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MateriaService } from '../../service/materias.service';
+import { Profesor } from '../../models/profesor';
+import { Curso } from '../../models/curso'; // 
 
 @Component({
   selector: 'app-crear-materia',
   templateUrl: './crear-materia.component.html',
   styleUrls: ['./crear-materia.component.css']
 })
-export class CrearMateriaComponent {
-  nombre: string = '';
+export class CrearMateriaComponent implements OnInit {
+  materiaForm: FormGroup;
+  profesores: Profesor[] = [];
+  cursos: Curso[] = [];
 
   constructor(
-    private materiaService: MateriaService,
-    private router: Router,
-    private snackBar: MatSnackBar
-  ) {}
+    private fb: FormBuilder,
+    private materiaService: MateriaService
+  ) {
+    this.materiaForm = this.fb.group({
+      id: ['', Validators.required],
+      nombre: ['', Validators.required],
+      profesor: [null, Validators.required],
+      curso: [null, Validators.required], // Use 'curso' instead of 'cursos'
+    });
+  }
 
-  crearMateria(): void {
-    if (!this.nombre) {
-      return;
-    }
-
-    this.materiaService.crearMateria({
-      nombre: this.nombre,
-      id: 0
-    }).subscribe(
-      () => {
-        this.mostrarMensajeExito('Materia creada exitosamente');
-        this.router.navigate(['/materias']);
+  ngOnInit(): void {
+    this.materiaService.obtenerProfesores().subscribe(
+      profesores => {
+        this.profesores = profesores;
       },
       error => {
-        this.mostrarMensajeError('Error al crear materia');
-        console.error('Error al crear materia:', error);
+        console.error('Error al obtener profesores:', error);
+      }
+    );
+
+    this.materiaService.obtenerCursos().subscribe(
+      cursos => {
+        this.cursos = cursos;
+      },
+      error => {
+        console.error('Error al obtener cursos:', error);
       }
     );
   }
 
-  private mostrarMensajeExito(mensaje: string): void {
-    const config: MatSnackBarConfig = {
-      duration: 3000,
-      panelClass: 'exito-snackbar'
-    };
-    this.snackBar.open(mensaje, 'Cerrar', config);
-  }
+  crearMateria(): void {
+    if (this.materiaForm.invalid) {
+      return;
+    }
 
-  private mostrarMensajeError(mensaje: string): void {
-    const config: MatSnackBarConfig = {
-      duration: 3000,
-      panelClass: 'error-snackbar'
-    };
-    this.snackBar.open(mensaje, 'Cerrar', config);
+    const materia = this.materiaForm.value;
+
+    this.materiaService.crearMateria(materia).subscribe(
+      () => {
+        console.log('Materia creada exitosamente');
+      },
+      error => {
+        console.error('Error al crear materia:', error);
+      }
+    );
   }
 }
+

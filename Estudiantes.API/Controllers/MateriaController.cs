@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Estudiantes.API.Models;
-using Estudiantes.API.Data; 
+using Estudiantes.API.Data;
 using Estudiantes.API.Services;
 namespace Estudiantes.API.Controllers
 {
@@ -47,9 +47,19 @@ namespace Estudiantes.API.Controllers
                 return BadRequest("El profesor ya tiene asignadas dos materias.");
             }
 
+            var cursoAsignado = _context.Cursos.FirstOrDefault(c => c.Id == materia.Curso.Id);
+
+            if (cursoAsignado == null)
+            {
+                return BadRequest("El curso especificado no existe.");
+            }
+
+            materia.Curso = cursoAsignado;
+
             _materiaService.CreateMateria(materia);
             return CreatedAtAction(nameof(GetMateria), new { id = materia.Id }, materia);
         }
+
 
 
         [HttpPut("{id}")]

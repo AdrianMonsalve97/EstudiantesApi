@@ -6,6 +6,7 @@ namespace Estudiantes.API.Models
     {
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
-        public Profesor Profesor { get; set; } 
-    }
+        public Profesor Profesor { get; set; }
+        public Curso Curso { get; set; } 
+   }
 }
